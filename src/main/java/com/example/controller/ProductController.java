@@ -21,7 +21,6 @@ public class ProductController {
 				new Product(2, "ティーポット", 2400),
 				new Product(3, "マグカップ", 1500));
 		model.addAttribute("products", products);
-		model.addAttribute("products", products);
 		return "product/list";
 	}
 
