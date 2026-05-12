@@ -64,4 +64,6 @@ public class AuthController {
 		session.invalidate();
 		return "redirect:/login";
 	}
+
+	//Gitの練習
 }
