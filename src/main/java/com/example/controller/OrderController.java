@@ -6,10 +6,12 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.entity.CartItem;
+import com.example.entity.OrderHistoryRow;
 import com.example.entity.User;
 import com.example.service.CartService;
 import com.example.service.OrderService;
@@ -44,5 +46,18 @@ public class OrderController {
 
 		model.addAttribute("orderId", orderId);
 		return "order/complete";
+	}
+
+	/** 購入履歴を表示する */
+	@GetMapping("/history")
+	public String history(HttpSession session, Model model) {
+		User loginUser = (User) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			return "redirect:/login";
+		}
+
+		List<OrderHistoryRow> historyRows = orderService.findHistoryByUserId(loginUser.getId());
+		model.addAttribute("historyRows", historyRows);
+		return "order/history";
 	}
 }

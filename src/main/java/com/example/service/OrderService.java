@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.entity.CartItem;
 import com.example.entity.Order;
+import com.example.entity.OrderHistoryRow;
 import com.example.entity.OrderItem;
 import com.example.mapper.OrderMapper;
 
@@ -41,5 +42,10 @@ public class OrderService {
 		orderMapper.insertOrderItems(items);
 
 		return order.getId();
+	}
+
+	/** 指定ユーザの購入履歴を取得する */
+	public List<OrderHistoryRow> findHistoryByUserId(int userId) {
+		return orderMapper.findHistoryByUserId(userId);
 	}
 }

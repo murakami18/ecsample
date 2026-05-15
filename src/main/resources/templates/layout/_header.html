@@ -5,6 +5,7 @@
 		<a href="/products">商品一覧</a> |
 		<a href="/cart">カート</a>
 		<th:block th:if="${session.loginUser != null}">
+			<a href="/order/history">注文履歴</a> |
 			[[${session.loginUser.name}]]さん |
 			<form th:action="@{/logout}" method="post" style="display:inline">
 				<button type="submit">ログアウト</button>

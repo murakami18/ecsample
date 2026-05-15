@@ -18,4 +18,18 @@
     </foreach>
   </insert>
 
+    <select id="findHistoryByUserId" resultType="com.example.entity.OrderHistoryRow">
+    SELECT
+      o.id AS order_id,
+      o.created_at,
+      oi.name AS product_name,
+      oi.price,
+      oi.quantity,
+      (oi.price * oi.quantity) AS subtotal
+    FROM orders o
+    INNER JOIN order_items oi ON o.id = oi.order_id
+    WHERE o.user_id = #{userId}
+    ORDER BY o.id DESC, oi.id ASC
+  </select>
+
 </mapper>

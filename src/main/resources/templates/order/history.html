@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>注文履歴</title>
+</head>
+<body>
+  <header th:replace="layout/_header :: header"></header>
+
+  <main>
+    <h1>注文履歴</h1>
+
+    <p th:if="${#lists.isEmpty(historyRows)}">購入履歴はまだありません。</p>
+
+    <table th:unless="${#lists.isEmpty(historyRows)}" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>注文番号</th>
+          <th>注文日時</th>
+          <th>商品名</th>
+          <th>単価</th>
+          <th>数量</th>
+          <th>小計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="row : ${historyRows}">
+          <td>[[${row.orderId}]]</td>
+          <td>[[${#temporals.format(row.createdAt, 'yyyy-MM-dd HH:mm')}]]</td>
+          <td>[[${row.productName}]]</td>
+          <td>[[${#numbers.formatDecimal(row.price, 0, 'COMMA', 0, 'POINT')}]]円</td>
+          <td>[[${row.quantity}]]</td>
+          <td>[[${#numbers.formatDecimal(row.subtotal, 0, 'COMMA', 0, 'POINT')}]]円</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer th:replace="layout/_footer :: footer"></footer>
+</body>
+</html>
