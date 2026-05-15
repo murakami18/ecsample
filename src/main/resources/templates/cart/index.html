@@ -40,6 +40,9 @@
 			</table>
 
 			<p><strong>合計：[[${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}]]円</strong></p>
+			<form th:action="@{/order/confirm}" method="post">
+				<button type="submit">購入する</button>
+			</form>
 		</th:block>
 
 		<a href="/products">▶ 商品一覧に戻る</a>
